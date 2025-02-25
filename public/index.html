@@ -1,43 +1,338 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <title>Key and Data Backup and Recovery</title>
+    <meta charset="UTF-8" />
+    <script
+      src="https://kit.fontawesome.com/c939d0e917.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <div class="container">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="user.html">User Page</a>
+      </nav>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+      <h1>Get back your key</h1>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+      <div class="connect">
+        <button id="connectWalletBtn">Connect Wallet</button>
+        <div id="userAddress"></div>
+      </div>
+
+      <div id="connectMessage">Please connect your wallet to tweet.</div>
+
+      <form id="tweetForm" style="display: none">
+        <textarea
+          id="tweetContent"
+          rows="4"
+          placeholder="Add data to blockchain"
+        ></textarea
+        ><br />
+        <button id="tweetSubmitBtn" type="submit">Add Data</button>
+      </form>
+
+      <div id="tweetsContainer"></div>
+
+      <div id="verifierInput" style="display: none">
+        <h2>Set verifiers</h2>
+        <h5>Enter Minimum Verifier Count</h5>
+        <input
+          type="number"
+          id="verifierCount"
+          placeholder="Enter count"
+          required
+        />
+        <button id="submitBtn">Set Verifier Count</button>
+        <p id="statusMessage"></p>
+      </div>
+
+      <div id="verifierRemove" style="display: none">
+        <h2>Remove Verifier</h2>
+        <textarea
+          id="RemoveAddressVerifier"
+          rows="1"
+          placeholder="Enter verifier address"
+        ></textarea
+        ><br />
+        <button id="removeVerifierBtn">Remove Verifier</button>
+        <p id="removeVerifierstatus"></p>
+      </div>
+
+      <div id="verifierAdd" style="display: none">
+        <h2>Add verifiers</h2>
+        <textarea
+          id="verifierAddress"
+          rows="1"
+          placeholder="Enter Verifier Address"
+        ></textarea
+        ><br />
+        <button id="addVerifierBtn">Add verifier</button>
+        <p id="VerifierOutput"></p>
+      </div>
+
+      <div id="storeHash" style="display: none">
+        <h2>Store Hash of data</h2>
+        <textarea id="DataHash" rows="1" placeholder="Enter Data"></textarea
+        ><br />
+        <input
+          type="number"
+          id="Datanumber"
+          placeholder="Enter the index"
+          min="1"
+        />
+        <br />
+        <button id="storeHashData">Store Hash</button>
+        <p id="StoreHashOutput"></p>
+      </div>
+
+      <div id="storeKeyHash" style="display: none">
+        <h2>Store Hash of Key</h2>
+        <textarea id="KeyHash" rows="1" placeholder="Enter Data"></textarea
+        ><br />
+        <input
+          type="number"
+          id="Keynumber"
+          placeholder="Enter the index"
+          min="1"
+        />
+        <br />
+        <button id="storeHashKey">Store Hash</button>
+        <p id="StoreHashKeyOutput"></p>
+      </div>
+
+      <div id="verifyHash">
+        <h2>Verify stored data</h2>
+        <textarea
+          id="verifierHashaddress"
+          rows="1"
+          placeholder="Enter Address"
+        ></textarea
+        ><br />
+        <textarea
+          id="verifyDataHash"
+          rows="1"
+          placeholder="Enter Data"
+        ></textarea
+        ><br />
+        <input
+          type="number"
+          id="verifyDatanumber"
+          placeholder="Enter the index"
+          min="1"
+        />
+        <br />
+        <button id="verifystoreHashData">verify Data</button>
+        <p id="verifyStoreHashOutput"></p>
+      </div>
+
+      <div id="verifyKeyHash">
+        <h2>Verify stored Key</h2>
+        <textarea
+          id="verifierKeyHashaddress"
+          rows="1"
+          placeholder="Enter Address"
+        ></textarea
+        ><br />
+        <textarea
+          id="verifyKeyinput"
+          rows="1"
+          placeholder="Enter Data"
+        ></textarea
+        ><br />
+        <input
+          type="number"
+          id="verifyKeynumber"
+          placeholder="Enter the index"
+          min="1"
+        />
+        <br />
+        <button id="verifystoreHashKey">verify Key</button>
+        <p id="verifyStoreHashKeyOutput"></p>
+      </div>
+
+      <div>
+        <h2>Get Data from Blockchain Account</h2>
+        <textarea id="dataInput" rows="2" placeholder="Enter Address"></textarea
+        ><br />
+
+        <button id="get_data">Get Data</button>
+
+        <div id="dataOutput"></div>
+      </div>
+
+      <div>
+        <h2>Get Minimum number of Verifier</h2>
+        <textarea
+          id="verifierCountInput"
+          rows="1"
+          placeholder="Enter Address"
+        ></textarea
+        ><br />
+
+        <button id="getCountBtn">Get Min Verifier Count</button>
+
+        <p>Current Verifier Count: <span id="verifierCountOutput">-</span></p>
+      </div>
+
+      <div>
+        <h2>Check account is verified or not</h2>
+        <textarea
+          id="checkVerify"
+          rows="1"
+          placeholder="Enter Address"
+        ></textarea
+        ><br />
+
+        <button id="isVerified">Verified?</button>
+
+        <p id="verifiedOutput"></p>
+      </div>
+
+      <div>
+        <h2>Get Verifier addresses</h2>
+        <textarea
+          id="inputAccount"
+          rows="1"
+          placeholder="Enter Address"
+        ></textarea
+        ><br />
+        <button id="getVerifiersBtn">Get Verifiers</button>
+        <h3>Verifier Addresses:</h3>
+        <div id="verifierList"></div>
+      </div>
+
+      <div>
+        <h2>Verify Account</h2>
+        <textarea
+          id="inputAccountAddress"
+          rows="1"
+          placeholder="Enter account address"
+        ></textarea
+        ><br />
+
+        <button id="VerifyAccountBtn">Verify Account</button>
+        <p id="VerificationstatusMessage"></p>
+      </div>
+      <div id="GenerateKey">
+        <h2>Generate Keys</h2>
+        <textarea
+          id="GenerateKeyInputText"
+          rows="1"
+          placeholder="Enter Password"
+        ></textarea
+        ><br />
+        <input
+          type="number"
+          id="GenerateKeyInputNumber"
+          placeholder="Enter number of keys"
+          min="1"
+        />
+        <br />
+        <button id="GenerateKeyButton">Generate Keys</button>
+        <ol id="GenerateKeyOutput"></ol>
+      </div>
+
+      <div>
+        <h2>Encrypt data</h2>
+        <div>
+          <label for="inputEncryptionText">Input Text:</label><br />
+          <textarea id="inputEncryptionText" rows="4" cols="50"></textarea>
+        </div>
+        <br />
+        <div>
+          <label for="inputEncryptionKey">Encryption Key:</label><br />
+          <textarea id="inputEncryptionKey" rows="1" cols="50"></textarea>
+        </div>
+        <br />
+        <button id="encryptText">Encrypt Text</button>
+
+        <h3>Encrypted Result:</h3>
+        <div id="EncryptOutput"></div>
+      </div>
+
+      <div>
+        <h2>Decrypt data</h2>
+        <div>
+          <label for="inputDecryptionText">Input Text:</label><br />
+          <textarea id="inputDecryptionText" rows="4" cols="50"></textarea>
+        </div>
+        <br />
+        <div>
+          <label for="inputDecryptionKey">Decryption Key:</label><br />
+          <textarea id="inputDecryptionKey" rows="1" cols="50"></textarea>
+        </div>
+        <br />
+        <button id="decryptText">Decrypt Text</button>
+
+        <h3>Encrypted Result:</h3>
+        <div id="DecryptOutput"></div>
+      </div>
+
+      <div>
+        <h2>Decrypt data</h2>
+        <div>
+          <label for="inputDecryptionText">Input Text:</label><br />
+          <textarea id="inputDecryptionText" rows="4" cols="50"></textarea>
+        </div>
+        <br />
+        <div>
+          <label for="inputDecryptionKey">Decryption Key:</label><br />
+          <textarea id="inputDecryptionKey" rows="1" cols="50"></textarea>
+        </div>
+        <br />
+        <button id="decryptText">Decrypt Text</button>
+
+        <h3>Encrypted Result:</h3>
+        <div id="DecryptOutput"></div>
+      </div>
+
+      <div id="GenerateShare">
+        <h2>Generate Shares</h2>
+        <textarea
+          id="GenerateShareInputText"
+          rows="1"
+          placeholder="Enter Data"
+        ></textarea
+        ><br />
+        <input
+          type="number"
+          id="GenerateShareInputNumber"
+          placeholder="Enter number of shares"
+          min="1"
+        />
+        <br />
+        <input
+          type="number"
+          id="MinShareInputNumber"
+          placeholder="Minimum number of shares"
+          min="1"
+        />
+        <br />
+        <button id="GenerateShareButton">Generate Shares</button>
+        <ol id="GenerateShareOutput"></ol>
+      </div>
+
+      <div id="ConstructData">
+        <h2>Generate Data</h2>
+        <textarea
+          id="ConstructDataInputText"
+          rows="4"
+          placeholder="Enter Data"
+        ></textarea
+        ><br />
+        <button id="ConstructDataButton">Generate data</button>
+        <h3>Result:</h3>
+        <div id="ConstructDataOutput"></div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1/web3.min.js"></script>
+    <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
+    <script src="../src/index.js"></script>
   </body>
 </html>
