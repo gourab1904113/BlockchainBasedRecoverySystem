@@ -691,3 +691,123 @@ async function ConstructData() {
 document
   .getElementById("ConstructDataButton")
   .addEventListener("click", ConstructData);
+
+async function GeneratePublicKey() {
+  const Text = document
+    .getElementById("GeneratePublicKeyInputText")
+    .value.trim();
+
+  console.log(Text);
+
+  if (Text === "") {
+    alert("Please enter some text!");
+    return;
+  }
+
+  const response = await fetch("http://127.0.0.1:5000/GeneratePublicKey", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text: Text }),
+  });
+
+  const data = await response.json();
+  const output = document.getElementById("GeneratePublicKeyOutput");
+
+  if (data.result) {
+    output.innerHTML = `Public Key:<br>
+      x: ${data.result.x} <br>
+      y: ${data.result.y}`;
+  } else {
+    alert("Error: " + (data.error || "Unknown error"));
+  }
+}
+
+document
+  .getElementById("GeneratePublicKeyButton")
+  .addEventListener("click", GeneratePublicKey);
+
+async function generateSecretKey() {
+  const privateKeyHex = document.getElementById("privateKeyInput").value.trim();
+  const publicKeyXHex = document.getElementById("publicKeyXInput").value.trim();
+  const publicKeyYHex = document.getElementById("publicKeyYInput").value.trim();
+
+  if (!privateKeyHex || !publicKeyXHex || !publicKeyYHex) {
+    alert("Please enter all values!");
+    return;
+  }
+
+  const response = await fetch("http://127.0.0.1:5000/GenerateSecretKey", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      private_key: privateKeyHex,
+      public_key_x: publicKeyXHex,
+      public_key_y: publicKeyYHex,
+    }),
+  });
+
+  const data = await response.json();
+  const output = document.getElementById("secretKeyOutput");
+
+  if (data.secret_key) {
+    output.innerText = `Secret Key: ${data.secret_key}`;
+  } else {
+    alert("Error: " + (data.error || "Unknown error"));
+  }
+}
+
+document
+  .getElementById("generateSecretKeyButton")
+  .addEventListener("click", generateSecretKey);
+
+async function storeDataIPFS() {
+  const data = document.getElementById("inputDataIPFS").value.trim();
+
+  if (data === "") {
+    alert("Please enter some data to store.");
+    return;
+  }
+
+  const response = await fetch("http://127.0.0.1:5000/storeIPFS", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ data }),
+  });
+
+  const result = await response.json();
+  if (result.hash) {
+    document.getElementById("ipfsHash").innerText = result.hash;
+  } else {
+    alert("Error storing data.");
+  }
+}
+
+document
+  .getElementById("IPFSStoreButton")
+  .addEventListener("click", storeDataIPFS);
+
+async function retrieveDataIPFS() {
+  const data = document.getElementById("hashInput").value.trim();
+
+  if (!data) {
+    alert("Please enter an IPFS hash.");
+    return;
+  }
+
+  const response = await fetch("http://127.0.0.1:5000/retrieveIPFS", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ data }),
+  });
+
+  const result = await response.json();
+  if (result.data) {
+    document.getElementById("ipfsData").innerText = result.data;
+  } else {
+    alert("Error retrieving data.");
+  }
+}
+
+document
+  .getElementById("IPFSRetreiveButton")
+  .addEventListener("click", retrieveDataIPFS);

@@ -184,3 +184,23 @@ nav a {
 nav a:hover {
   color: rgba(114, 114, 114, 0.981);
 }
+
+#ipfsData {
+  display: block;
+  max-width: 100%; /* Limit width */
+  height: 200px; /* Limit height for the scrollable area */
+  overflow: auto; /* Enable scrolling if the content overflows */
+  word-wrap: break-word; /* Break long words to fit */
+  border: 1px solid #ddd; /* Optional: Border for better visibility */
+  padding: 10px; /* Optional: Add some padding */
+  white-space: pre-wrap; /* Preserve line breaks */
+}
+
+#GenerateShareInputNumber,
+#MinShareInputNumber {
+  width: 300px;
+  padding: 5px;
+  border: 1px solid;
+  margin: 5px;
+  border-radius: 5px;
+}

@@ -14,7 +14,6 @@
     <div class="container">
       <nav>
         <a href="index.html">Home</a>
-        <a href="user.html">User Page</a>
       </nav>
 
       <h1>Get back your key</h1>
@@ -273,24 +272,6 @@
         <div id="DecryptOutput"></div>
       </div>
 
-      <div>
-        <h2>Decrypt data</h2>
-        <div>
-          <label for="inputDecryptionText">Input Text:</label><br />
-          <textarea id="inputDecryptionText" rows="4" cols="50"></textarea>
-        </div>
-        <br />
-        <div>
-          <label for="inputDecryptionKey">Decryption Key:</label><br />
-          <textarea id="inputDecryptionKey" rows="1" cols="50"></textarea>
-        </div>
-        <br />
-        <button id="decryptText">Decrypt Text</button>
-
-        <h3>Encrypted Result:</h3>
-        <div id="DecryptOutput"></div>
-      </div>
-
       <div id="GenerateShare">
         <h2>Generate Shares</h2>
         <textarea
@@ -328,6 +309,62 @@
         <button id="ConstructDataButton">Generate data</button>
         <h3>Result:</h3>
         <div id="ConstructDataOutput"></div>
+      </div>
+
+      <div id="GeneratePublicKey">
+        <h2>Generate Public key</h2>
+        <textarea
+          id="GeneratePublicKeyInputText"
+          rows="4"
+          placeholder="Enter Private key"
+        ></textarea
+        ><br />
+        <button id="GeneratePublicKeyButton">Generate Key</button>
+        <h3>Result:</h3>
+        <div id="GeneratePublicKeyOutput"></div>
+      </div>
+
+      <div>
+        <h2>Secret Key Generation</h2>
+
+        <label>Private Key (Hex):</label><br />
+        <textarea id="privateKeyInput" rows="2" cols="50"></textarea
+        ><br /><br />
+
+        <label>Public Key X (Hex):</label><br />
+        <textarea id="publicKeyXInput" rows="2" cols="50"></textarea
+        ><br /><br />
+
+        <label>Public Key Y (Hex):</label><br />
+        <textarea id="publicKeyYInput" rows="2" cols="50"></textarea
+        ><br /><br />
+
+        <button id="generateSecretKeyButton">Generate Secret Key</button>
+
+        <h3>Secret Key:</h3>
+        <p id="secretKeyOutput"></p>
+      </div>
+
+      <div>
+        <h2>Store Data in IPFS</h2>
+        <textarea
+          id="inputDataIPFS"
+          rows="4"
+          cols="50"
+          placeholder="Enter data to store in IPFS"
+        ></textarea
+        ><br />
+        <button id="IPFSStoreButton">Store in IPFS</button>
+        <p>IPFS Hash: <span id="ipfsHash"></span></p>
+
+        <h2>Retrieve Data from IPFS</h2>
+        <textarea
+          type="text"
+          id="hashInput"
+          placeholder="Enter IPFS Hash"
+        ></textarea>
+        <button id="IPFSRetreiveButton">Retrieve</button>
+        <div>Retrieved Data: <span id="ipfsData"></span></div>
       </div>
     </div>
 
